@@ -1,0 +1,15 @@
+vSHSHrk [ft/s] (Vfel/sheet és Vshalow_concetr)
+
+if (( "cflwLrk@1" < 100*sqrt("slopeszazalek_masfeles@1"/100)/"slope_nFelsz@1" ),   
+  "cflwLrk@1" / 3600*0.007*("slope_nFelsz@1" * 100*sqrt("slopeszazalek_masfeles@1"/100)/"slope_nFelsz@1")^0.8/("Qrk@1"^0.5 * "slopeszazalek_masfeles@1"^0.4), 
+  "slope_VpgS@1"*sqrt("slopeszazalek_masfeles@1") )
+
+
+
+vSHSHCHrk [ft/s] (Vfel/sheet, Vshal és Vchannel) - csapadékidő maximalizálva a max vízhozamból történő vízsebesség-számításhoz
+
+if( ("flowacc_vagott@1"<8), 
+  if (( "cflwLrk@1" < 100*sqrt("slopeszazalek_masfeles@1"/100)/"slope_nFelsz@1" ),   
+    "cflwLrk@1" / 3600*0.007*("slope_nFelsz@1" * 100*sqrt("slopeszazalek_masfeles@1"/100)/"slope_nFelsz@1")^0.8/("Qrk@1"^0.5 * "slopeszazalek_masfeles@1"^0.4),  
+    "slope_VpgS@1"*sqrt("slopeszazalek_masfeles@1") ), 
+  1.49*("Qrk@1"*"flowacc_vagott@1"*min(24/("cflwLrk@1"/"vSHSHrk@1"), 8)/8)^0.333*"slopeszazalek_masfeles@1"^0.5/"slope_nMed@1" )
