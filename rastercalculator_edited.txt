@@ -1,15 +1,15 @@
 vSHSHrk [ft/s] (Vfel/sheet és Vshalow_concetr)
 
-if (( "cflwLrk@1" < 100*sqrt("slopeszazalek_masfeles@1"/100)/"slope_nFelsz@1" ),   
-  "cflwLrk@1" / 3600*0.007*("slope_nFelsz@1" * 100*sqrt("slopeszazalek_masfeles@1"/100)/"slope_nFelsz@1")^0.8/("Qrk@1"^0.5 * "slopeszazalek_masfeles@1"^0.4), 
-  "slope_VpgS@1"*sqrt("slopeszazalek_masfeles@1") )
+if (( "cflwLrk@1"*"flowacc_vagott@1" < 100*sqrt(max("slopeszazalek_masfeles@1", 5)/100)/"slope_nFelsz@1" ),   
+    "cflwLrk@1" / (3600*0.007*("slope_nFelsz@1" * 100*sqrt(max("slopeszazalek_masfeles@1", 5)/100)/"slope_nFelsz@1")^0.8/("Qrk@1"^0.5 * (max("slopeszazalek_masfeles@1", 5)/100)^0.4)*"cflwLrk@1"/(100*sqrt(max("slopeszazalek_masfeles@1", 5)/100)/"slope_nFelsz@1")),  
+    "slope_VpgS@1"*sqrt(max("slopeszazalek_masfeles@1", 5)/100) )
 
 
 
 vSHSHCHrk [ft/s] (Vfel/sheet, Vshal és Vchannel) - csapadékidő maximalizálva a max vízhozamból történő vízsebesség-számításhoz
 
 if( ("flowacc_vagott@1"<20), 
-  if (( "cflwLrk@1" < 100*sqrt("slopeszazalek_masfeles@1"/100)/"slope_nFelsz@1" ),   
-    "cflwLrk@1" / 3600*0.007*("slope_nFelsz@1" * 100*sqrt("slopeszazalek_masfeles@1"/100)/"slope_nFelsz@1")^0.8/("Qrk@1"^0.5 * "slopeszazalek_masfeles@1"^0.4),  
-    "slope_VpgS@1"*sqrt("slopeszazalek_masfeles@1") ), 
-  1.49*("Qrk@1"*"flowacc_vagott@1"*min(24/("cflwLrk@1"/"vSHSHrk@1"), 20)/20)^0.333*"slopeszazalek_masfeles@1"^0.5/"slope_nMed@1" )
+    if (( "cflwLrk@1"*"flowacc_vagott@1" < 100*sqrt(max("slopeszazalek_masfeles@1", 5)/100)/"slope_nFelsz@1" ),   
+        "cflwLrk@1" / (3600*0.007*("slope_nFelsz@1" * 100*sqrt(max("slopeszazalek_masfeles@1", 5)/100)/"slope_nFelsz@1")^0.8/("Qrk@1"^0.5 * (max("slopeszazalek_masfeles@1", 5)/100)^0.4)*"cflwLrk@1"/(100*sqrt(max("slopeszazalek_masfeles@1", 5)/100)/"slope_nFelsz@1")),  
+        "slope_VpgS@1"*sqrt(max("slopeszazalek_masfeles@1", 5)/100) ), 
+    1.49*(3*"Qrk@1"*"flowacc_vagott@1"*min(1800/("cflwLrk@1"/"vSHSHrk@1"), 20)/20)^0.333*(max("slopeszazalek_masfeles@1", 0.01)/100)^0.5/"slope_nMed@1" )
